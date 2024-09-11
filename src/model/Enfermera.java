@@ -1,4 +1,4 @@
-package Doctor_General;
+package model;
 
 public class Enfermera {
 }
