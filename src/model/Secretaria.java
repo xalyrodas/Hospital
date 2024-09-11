@@ -1,4 +1,4 @@
-package personalGeneral;
+package model;
 
 public class Secretaria {
 }
