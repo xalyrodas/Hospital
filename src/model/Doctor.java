@@ -14,7 +14,7 @@ public class Doctor {
 
 
     //    public JLabel
-    public DoctorGeneral( String nombre, String apellido,String especialidad, int numeroLcencia, String password, String email, String usuario){
+    public Doctor(){
         this.nombre = nombre;
         this.apellido = apellido;
         this.especialidad = especialidad;
@@ -276,7 +276,7 @@ public class Doctor {
         });
 
         btnIngEnfermeras.addActionListener(e -> {
-            Enfermeras.ventanaEnfermeras();
+            Enfermera.ventanaEnfermeras();
         });
 
 
