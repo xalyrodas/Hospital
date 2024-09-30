@@ -15,8 +15,11 @@ public class Main {
 
 
 
+
+
        // Loging ventana = new Loging();
         LoginView venta = new LoginView();
+
 
         Loging ventana = new Loging();
 
