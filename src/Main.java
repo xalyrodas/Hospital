@@ -10,7 +10,6 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
-        new DoctorView();
 
 
 
@@ -20,8 +19,6 @@ public class Main {
        // Loging ventana = new Loging();
         LoginView venta = new LoginView();
 
-
-        Loging ventana = new Loging();
 
 
     }

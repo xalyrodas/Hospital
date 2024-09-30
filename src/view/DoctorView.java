@@ -124,40 +124,5 @@ public class DoctorView extends JFrame {
         add(panelPacientes, BorderLayout.CENTER);
 
 
-    private JPanel componentesLateral() {
-        JPanel menu = new JPanel();
-        menu.setPreferredSize(new Dimension(250, pantalla[1]));
-        menu.setBackground(Color.darkGray);
-
-       JPanel menu2 = new JPanel();
-       menu2.setLayout(new GridBagLayout());
-
-       GridBagConstraints gbc = new GridBagConstraints();
-       gbc.fill = GridBagConstraints.HORIZONTAL;
-       gbc.gridx= 0;
-
-
-        menu2.add(op("opcion 1"), gbc);
-        menu2.add(op("opcion 2"),gbc);
-        menu2.add(op("opcion 3"),gbc);
-        menu2.add(op("opcion 4"),gbc);
-        menu2.add(op("opcion 5"),gbc);
-
-        menu.add(menu2);
-        return menu;
-    }
-    private JButton op (String texto){
-        JButton op = new JButton(texto);
-
-
-       op.addActionListener(e -> {
-           System.out.println(texto);
-       });
-        return op;
-    }
-
-    public static void main (String[] args){
-        new DoctorView();
-
     }
 }

@@ -271,13 +271,7 @@ public class Doctor {
         btnIngEnfermeras.setFont(new Font("Bahnschrift", Font.BOLD, 20));
 
         // Accion del boton
-        btnIngPacientes.addActionListener(e -> {
-            Pacientes pacientes = new Pacientes();
-        });
 
-        btnIngEnfermeras.addActionListener(e -> {
-            Enfermera.ventanaEnfermeras();
-        });
 
 
         // Agregaciones en el Body
