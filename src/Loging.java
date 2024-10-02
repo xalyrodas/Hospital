@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class Loging  extends JFrame {
 
+
     public Loging(){
 
         //miventana

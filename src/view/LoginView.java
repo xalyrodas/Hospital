@@ -1,8 +1,15 @@
 package view;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame {
+
+    private JTextField emailField;
+    private JLabel passwordLabel;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+
     public LoginView() {
         setTitle("Formulario de Inicio de Sesión");
         setSize(400, 700);
@@ -15,24 +22,34 @@ public class LoginView extends JFrame {
         emailLabel.setBounds(20, 300, 120, 30); // x, y, width, height
         add(emailLabel);
 
-        JTextField emailField = new JTextField(20);
+        this.emailField = new JTextField(20);
         emailField.setBounds(150, 300, 200, 30); // x, y, width, height
         add(emailField);
 
-        JLabel passwordLabel = new JLabel("Contraseña:");
+        this.passwordLabel = new JLabel("Contraseña:");
         passwordLabel.setBounds(20, 350, 120, 30); // x, y, width, height
         add(passwordLabel);
 
-        JPasswordField passwordField = new JPasswordField(20);
+        this.passwordField = new JPasswordField(20);
         passwordField.setBounds(150, 350, 200, 30); // x, y, width, height
         add(passwordField);
 
-        JButton loginButton = new JButton("Iniciar Sesión");
+        this.loginButton = new JButton("Iniciar Sesión");
         loginButton.setBounds(150, 400, 150, 30); // x, y, width, height
         add(loginButton);
 
     setVisible(true);
     }
+    public String getCorreo(){
+        return emailField.getText();
+    }
 
+    public String getPasswordLabel() {
+        return passwordLabel.getText();
+    }
+
+    public void addLoginListener(ActionListener Listener) {
+        loginButton.addActionListener(Listener);
+    }
 }
 

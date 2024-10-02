@@ -10,9 +10,8 @@ public class bdDoctores {
 
     public static ArrayList listaDoctores(){
 
-        // La clase arrayList crea un objeto de la clase alumno.
         ArrayList<Doctor> doctores = new ArrayList<>();
-        doctores.add(new Doctor());
+        doctores.add(new Doctor("Jose", "Garcia", "Doctor General", 2, "jose@gmail.com", "jose123", "joseGar"));
 
 
         return doctores;

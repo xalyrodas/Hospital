@@ -14,7 +14,7 @@ public class Doctor {
 
 
     //    public JLabel
-    public Doctor(){
+    public Doctor(String nombre, String apellido, String especialidad, int numeroLcencia, String email, String password, String usuario){
         this.nombre = nombre;
         this.apellido = apellido;
         this.especialidad = especialidad;
@@ -22,9 +22,6 @@ public class Doctor {
         this.email = email;
         this.password = password;
         this.usuario = usuario;
-    }
-
-    public Doctor(String s, String aLmendro, String pediatra, int i, String patitas123, String mail, String almendro) {
     }
 
     public static void ventanaDoctor() {

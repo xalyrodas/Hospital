@@ -7,31 +7,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BackEnd {
-    public static String validarDatos(String user, String password){
+    private ArrayList<Doctor> doctors;
 
-//       System.out.println("XX"+user);
-//       System.out.println("ZXX"+password);
+    public BackEnd(){
+        this.doctors = bdDoctores.listaDoctores();
+    }
 
+    public HashMap<String, String> validarDatos(String correo, String contraseña) {
+        HashMap<String, String> resultado = new HashMap<>();
 
-        bdDoctores bdDoctores = null;
-        ArrayList<Doctor> doctores = bdDoctores.listaDoctores();
-
-        for (Doctor infoDoc : doctores){
-
-            if (infoDoc.getEmail().equalsIgnoreCase(user)){
-
-//               System.out.println("HOLA");
-
-                HashMap<String, String> datosDoctor = new HashMap<>();
-                datosDoctor.put(user, infoDoc.getPasswordD());
-                System.out.println("DOCTOR "+datosDoctor);
-            } else {
-//               System.out.println("Usuario no existe");
+        for (Doctor doctor : doctors) {
+            if (doctor.getEmail().equalsIgnoreCase(correo)) {
+                if (doctor.getPasswordD().equalsIgnoreCase(contraseña)) {
+                    resultado.put("Nombre", doctor.getNombre());
+                    resultado.put("Especialidad", doctor.getEspecialidad());
+                    resultado.put("Edad", doctor.getUsuario());
+                    return resultado;
+                } else {
+                    resultado.put("Error", "Contraseña incorrecta");
+                    return resultado;
+                }
             }
-
         }
 
-        return user;
+        resultado.put("Error", "Usuario Incorrecto");
+        return resultado;
     }
 
 }
