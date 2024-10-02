@@ -1,4 +1,5 @@
 
+import controller.LogingController;
 import view.LoginView;
 
 import view.DoctorView;
@@ -10,16 +11,9 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
+        LoginView loginView = new LoginView();
 
-
-
-
-
-
-       // Loging ventana = new Loging();
-        LoginView venta = new LoginView();
-
-
+        LogingController controlLogin = new LogingController(loginView);
 
     }
 }
