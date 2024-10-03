@@ -5,26 +5,25 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import model.Medicamento;
 import model.Pacientes;
-import model.Sala;
 import view.SalaView;
-import view.PacienteView;
+import view.FarmaciaView;
 import services.bdPacientes;
+
+import static view.DataFarmacia.medicamentos;
 
 public class DoctorView extends JFrame {
     private int[] pantalla = {1300, 800};
     private JPanel salasViewPanel;
-    private JPanel pacientes;
-  //  private ArrayList<Pacientes>pacientes;
+    private JPanel farmaciaViewPanel;
 
-    public DoctorView(HashMap<String, String> datosDoctor, ArrayList<Pacientes>pacientes) {
+    public DoctorView(HashMap<String, String> datosDoctor, ArrayList<Pacientes> pacientes, ArrayList<Medicamento> listaMedicamentos) {
         setTitle("Perfil del doctor");
         setSize(pantalla[0], pantalla[1]);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-      //  this.pacientes=pacientes;
 
-        // Crear el panel de encabezado
         JPanel headerPanel = new JPanel();
         headerPanel.setPreferredSize(new Dimension(1300, 60));
         headerPanel.setBackground(Color.DARK_GRAY);
@@ -32,7 +31,6 @@ public class DoctorView extends JFrame {
 
         JLabel hospitalLabel = new JLabel("Hospital Santa Catalina");
         hospitalLabel.setForeground(Color.WHITE);
-        hospitalLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
         headerPanel.add(hospitalLabel, BorderLayout.WEST);
 
         JPanel userPanel = new JPanel();
@@ -65,11 +63,15 @@ public class DoctorView extends JFrame {
         add(headerPanel, BorderLayout.NORTH);
         add(componentesLateral(), BorderLayout.WEST);
 
-        // Crear y agregar el panel de pacientes
-
-       // PacienteView pacientes = new PacienteView(Pacientes) ;
         salasViewPanel = new SalaView();
-       // this.add(pacientes);
+
+        // Crear y agregar el panel de farmacia
+        FarmaciaView farmaciaView = new FarmaciaView(); // Llamar a la lista de medicamentos
+        farmaciaViewPanel = farmaciaView.panelMedicamentos(); // Instanciar FarmaciaView y llamar a panelMedicamentos
+
+        // Agregar inicialmente el panel de salas al JFrame
+        add(salasViewPanel, BorderLayout.CENTER);
+
         setVisible(true);
     }
 
@@ -87,34 +89,29 @@ public class DoctorView extends JFrame {
 
         menu.add(op("Consultas Del Día"), gbc);
         menu.add(op("Salas"), gbc);
-        menu.add(op("Farmacia"), gbc);
+        menu.add(op("Farmacia"), gbc); // Agregar opción de Farmacia
         menu.add(op("Pacientes registrados"), gbc);
         menu.add(op("Citar en otra area"), gbc);
 
         menuPanel.add(menu);
         return menuPanel;
-
     }
+
     private JButton op(String texto) {
         JButton op = new JButton(texto);
         op.addActionListener(e -> {
             System.out.println(texto);
             if (texto.equals("Salas")) {
-
-
-                this.remove(pacientes);
+                this.remove(farmaciaViewPanel); // Remover panel de farmacia
                 this.add(salasViewPanel, BorderLayout.CENTER);
-
-                // Actualizar la ventana para reflejar los cambios
-                this.revalidate();
-                this.repaint();
+            } else if (texto.equals("Farmacia")) {
+                this.remove(salasViewPanel); // Remover panel de salas
+                this.add(farmaciaViewPanel, BorderLayout.CENTER); // Mostrar panel de farmacia
             }
+
+            this.revalidate();
+            this.repaint();
         });
         return op;
     }
-
-
-
-    }
-
-
+}

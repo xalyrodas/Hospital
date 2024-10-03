@@ -1,5 +1,6 @@
 
 import controller.LogingController;
+import view.FarmaciaView;
 import view.LoginView;
 
 import view.DoctorView;
