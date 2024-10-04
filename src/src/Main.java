@@ -1,11 +1,10 @@
 
 import controller.LogingController;
-import view.FarmaciaView;
 import view.LoginView;
 
 import view.DoctorView;
 
-
+import backEnd.BackEnd;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,7 +13,9 @@ public class Main {
     public static void main(String[] args) {
         LoginView loginView = new LoginView();
 
-        LogingController controlLogin = new LogingController(loginView);
+        BackEnd backEnd=new BackEnd();
+        new LogingController(loginView,backEnd);
+        loginView.setVisible(true);
 
     }
 }

@@ -1,8 +1,10 @@
 package controller;
 
 import backEnd.BackEnd;
+import model.Medicamento;
 import model.Pacientes;
 import services.bdPacientes;
+import view.DataFarmacia;
 import view.DoctorView;
 import view.LoginView;
 
@@ -19,10 +21,10 @@ public class LogingController {
 
     private void iniciarSecion() {
         String correo = loginView.getCorreo();
-        String contraseña = loginView.getPasswordLabel();
+        String contrasena = loginView.getPasswordLabel();
 
         BackEnd consultaLogin = new BackEnd();
-        HashMap<String, String> datosDoctor = consultaLogin.validarDatos(correo,contraseña);
+        HashMap<String, String> datosDoctor = consultaLogin.validarDatos(correo,contrasena);
 
         if (datosDoctor.containsKey("Error")) {
             System.out.println(datosDoctor.get("Error"));
@@ -30,8 +32,9 @@ public class LogingController {
             loginView.dispose();
 
             ArrayList<Pacientes> listaPacientes = bdPacientes.listaPacientes();
+            ArrayList<Medicamento> listaMedicamentos = DataFarmacia.medicamentos();
 
-            new DoctorView(datosDoctor, listaPacientes);
+            new DoctorView(datosDoctor, listaPacientes, listaMedicamentos);
         }
     }
 }
