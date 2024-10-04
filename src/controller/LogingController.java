@@ -1,40 +1,41 @@
 package controller;
 
 import backEnd.BackEnd;
-import model.Medicamento;
-import model.Pacientes;
 import services.bdPacientes;
-import view.DataFarmacia;
 import view.DoctorView;
 import view.LoginView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LogingController {
-    private LoginView loginView;
+    private LoginView loginview;
+    private BackEnd backEnd;
+    private bdPacientes bdPacientes;
 
-    public LogingController(LoginView loginView){
-        this.loginView=loginView;
-        this.loginView.addLoginListener(e -> iniciarSecion());
+    public LogingController(LoginView loginview, BackEnd backEnd) {
+        this.loginview=loginview;
+        this.backEnd = backEnd;
+        this.bdPacientes = new bdPacientes();
+        initController();
     }
 
-    private void iniciarSecion() {
-        String correo = loginView.getCorreo();
-        String contrasena = loginView.getPasswordLabel();
+    public void initController() {
+        loginview.getLoginButton().addActionListener(e -> iniciarsesion());
+    }
 
-        BackEnd consultaLogin = new BackEnd();
-        HashMap<String, String> datosDoctor = consultaLogin.validarDatos(correo,contrasena);
+    public void iniciarsesion() {
+        String usuario = loginview.getEmailField().getText();
+        String contraseña = new String(loginview.getPasswordField().getPassword());
 
-        if (datosDoctor.containsKey("Error")) {
-            System.out.println(datosDoctor.get("Error"));
-        } else {
-            loginView.dispose();
+        HashMap<String, String> resultado = backEnd.validarDatos(usuario, contraseña);
 
-            ArrayList<Pacientes> listaPacientes = bdPacientes.listaPacientes();
-            ArrayList<Medicamento> listaMedicamentos = DataFarmacia.medicamentos();
+        if (!resultado.isEmpty()) {
+            String nombreDoctor = resultado.get("nombre");
+            String especialidad = resultado.get("especialidad");
 
-            new DoctorView(datosDoctor, listaPacientes, listaMedicamentos);
+            // Crear y mostrar la vista del doctor
+            DoctorView doctorView = new DoctorView(nombreDoctor, especialidad, bdPacientes);
+            doctorView.setVisible(true);
         }
     }
 }

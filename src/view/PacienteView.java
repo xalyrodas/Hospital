@@ -1,64 +1,47 @@
 package view;
+
+
+import model.Pacientes;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import model.Pacientes;
 
+public class PacienteView extends JPanel {
+    private ArrayList<Pacientes> listaPacientes;
 
-public class PacienteView {
-    // Atributo privado para almacenar la lista de pacientes
-    private ArrayList<Pacientes> pacientes;
-
-    // Constructor que recibe un ArrayList de tipo Paciente
-    public PacienteView(ArrayList<Pacientes> pacientes) {
-        this.pacientes = pacientes;
+    public PacienteView(ArrayList<Pacientes> listaPacientes) {
+        this.listaPacientes = listaPacientes;
+        initPanel();
     }
 
-    // Método que crea y retorna un JPanel con la lista de pacientes
-    public JPanel panelPaciente() {
-        // Crear el panel principal
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    private void initPanel() {
+        setLayout(new BorderLayout());
 
-        // Agregar el título
-        JLabel titulo = new JLabel("Listado de pacientes.");
-        titulo.setFont(new Font("Arial", Font.BOLD, 16));
-        panel.add(titulo);
-        panel.add(Box.createVerticalStrut(10)); // Espacio vertical
+        // Título del panel
+        JLabel titulo = new JLabel("Listado de pacientes", SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 18));
+        add(titulo, BorderLayout.NORTH);
 
-        // Crear el array de títulos de columna
-        String[] campos = {"NOMBRE", "FECHA_NACIMIENTO", "HORARIO_CITA", "VISITA"};
+        // Panel para mostrar los pacientes
+        JPanel panelPacientes = new JPanel();
+        panelPacientes.setLayout(new GridLayout(listaPacientes.size() + 1, 5)); // +1 for the header
 
-        // Crear un panel para los encabezados de la tabla
-        JPanel encabezadosPanel = new JPanel();
-        encabezadosPanel.setLayout(new GridLayout(1, campos.length));
+        // Encabezado de la tabla
+        panelPacientes.add(new JLabel("Nombre", SwingConstants.CENTER));
+        panelPacientes.add(new JLabel("Zona", SwingConstants.CENTER));
+        panelPacientes.add(new JLabel("Email", SwingConstants.CENTER));
+        panelPacientes.add(new JLabel("Enfermedad", SwingConstants.CENTER));
+        panelPacientes.add(new JLabel("Teléfono", SwingConstants.CENTER));
 
-        // Agregar los títulos de la tabla
-        for (String campo : campos) {
-            JLabel labelCampo = new JLabel(campo);
-            labelCampo.setFont(new Font("Arial", Font.BOLD, 14));
-            labelCampo.setHorizontalAlignment(SwingConstants.CENTER);
-            encabezadosPanel.add(labelCampo);
-        }
-        panel.add(encabezadosPanel);
-        panel.add(Box.createVerticalStrut(10)); // Espacio vertical
+        // Agregar los pacientes al panel
+        for (Pacientes pacientes : listaPacientes) {
+            panelPacientes.add(new JLabel(pacientes.getNombre(), SwingConstants.CENTER));
+            panelPacientes.add(new JLabel(pacientes.getDireccion(), SwingConstants.CENTER));
 
-        // Agregar los datos de los pacientes
-        for (Pacientes paciente : pacientes) {
-            JPanel filaPanel = new JPanel();
-            filaPanel.setLayout(new GridLayout(1, campos.length));
-
-            // Agregar los datos de cada paciente en una fila
-            filaPanel.add(new JLabel(paciente.getNombre()));
-            filaPanel.add(new JLabel(paciente.getFechaDeNacimiento()));
-            filaPanel.add(new JLabel(paciente.getHorarioCita()));
-            filaPanel.add(new JLabel(paciente.getMotivoVisita()));
-
-            // Agregar la fila al panel principal
-            panel.add(filaPanel);
+            panelPacientes.add(new JLabel(pacientes.getTelefono(), SwingConstants.CENTER));
         }
 
-        return panel;
-    }
-}
+        add(panelPacientes, BorderLayout.CENTER);
 
+    }}

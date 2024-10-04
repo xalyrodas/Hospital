@@ -7,11 +7,13 @@ import view.PacienteView;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class bdPacientes {
-    public static ArrayList listaPacientes() {
+    private ArrayList<Pacientes>pacientes;
+    public  bdPacientes() {
 
-        ArrayList<Pacientes> pacientes = new ArrayList<>();
+       pacientes=new ArrayList<>();
         pacientes.add(new Pacientes("Carlos Pérez", "cperez@gmail.com", "555-1234", "Calle Luna 123", "15/03/1985", "10:00 AM", "Chequeo General", 2, "Dr. Gómez"));
         pacientes.add(new Pacientes("Lucía Hernández", "lucia.h@gmail.com", "555-5678", "Av. Sol 456", "22/07/1992", "11:00 AM", "Consulta por Dolor", 1, "Dra. Torres"));
         pacientes.add(new Pacientes("Andrés Martínez", "andres.m@gmail.com", "555-8765", "Calle Estrella 789", "10/10/1980", "02:00 PM", "Consulta por Lesión", 3, "Dr. Fernández"));
@@ -32,6 +34,9 @@ public class bdPacientes {
         pacientes.add(new Pacientes("Laura Villalobos", "laura.v@correo.com", "555-8523", "Calle Cielo 147", "11/04/1990", "09:50 AM", "Chequeo Dermatológico", 3, "Dra. López"));
         pacientes.add(new Pacientes("Ángel Cordero", "angel.c@correo.com", "555-4567", "Av. Mar 369", "29/09/1988", "12:00 PM", "Consulta por Náuseas", 1, "Dr. Gómez"));
 
+
+    }
+    public List<Pacientes> getPacientes(){
         return pacientes;
     }
 }

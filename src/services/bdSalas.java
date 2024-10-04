@@ -3,26 +3,30 @@ import model.Sala;
 
 import java.util.ArrayList;
 
+
 public class bdSalas {
-        public static ArrayList listasala(){
-            ArrayList<Sala> salas = new ArrayList<>();
-            salas.add(new Sala("Sala de Emergencias", "Disponible"));
-            salas.add(new Sala("Sala de Operaciones 1", "En Uso"));
-            salas.add(new Sala("Sala de Operaciones 2", "Fuera de Servicio"));
-            salas.add(new Sala("Sala de Cuidados Intensivos", "En Uso"));
-            salas.add(new Sala("Sala de Recuperación", "Disponible"));
-            salas.add(new Sala("Sala de Maternidad", "Fuera de Servicio"));
-            salas.add(new Sala("Sala de Neonatología", "En Uso"));
-            salas.add(new Sala("Sala de Radiología", "Disponible"));
-            salas.add(new Sala("Sala de Quimioterapia", "En Uso"));
-            salas.add(new Sala("Sala de Consulta Externa", "Fuera de Servicio"));
-            salas.add(new Sala("Sala de Terapia Física", "Disponible"));
-            salas.add(new Sala("Sala de Endoscopia", "Fuera de Servicio"));
+    private ArrayList<Sala> listasalas;
 
-            return salas;
-        }
-
+    public bdSalas() {
+        listasalas = new ArrayList<>();
+        listasalas.add(new Sala("quirofano", "En uso"));
+        listasalas.add(new Sala("pediatria", "Disponible"));
+        listasalas.add(new Sala("emergencias", "Fuera de servicio"));
+        listasalas.add(new Sala("urgencias", "En uso"));
+        listasalas.add(new Sala("sala de espera", "Disponible"));
+        listasalas.add(new Sala("ginecologia", "Fuera de servicio"));
+        listasalas.add(new Sala("odontologia", "En uso"));
+        listasalas.add(new Sala("sala de espera", "Disponible"));
+        listasalas.add(new Sala("neoruologia", "Fuera de servicio"));
+        listasalas.add(new Sala("morge", "Disponible"));
+        listasalas.add(new Sala("camillas", "En uso"));
+        listasalas.add(new Sala("pre operacion", "Disponible"));
     }
+
+    public ArrayList<Sala> getListasalas() {
+        return listasalas;
+    }
+}
     
 
 

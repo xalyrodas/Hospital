@@ -1,46 +1,67 @@
 package view;
+
 import model.Sala;
 import services.bdSalas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-    public class SalaView extends JPanel {
+public class SalaView extends JPanel {
+    private ArrayList<Sala> listaSalas;
 
-        public SalaView() {
-            this.setLayout(new GridLayout(4, 4, 10, 10));
-            this.setBackground(Color.LIGHT_GRAY);
-
-            ArrayList<Sala> listaSalas = bdSalas.listasala();
-
-            for (Sala sala : listaSalas) {
-                JPanel salaPanel = new JPanel();
-                salaPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-                salaPanel.setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.gridx = 0;
-                gbc.gridy = 0;
-
-
-                // Se le agrega el color segun el estado
-                switch (sala.getEstado().toLowerCase()) {
-                    case "disponible":
-                        salaPanel.setBackground(Color.BLUE);
-                        break;
-                    case "en uso":
-                        salaPanel.setBackground(Color.PINK);
-                        break;
-                    case "fuera de servicio":
-                        salaPanel.setBackground(Color.RED);
-                        break;
-                }
-
-                JLabel salaLabel = new JLabel(sala.getNombre());
-                salaLabel.setForeground(Color.BLACK);
-                salaPanel.add(salaLabel);
-
-                this.add(salaPanel);
-            }
-        }
+    // Constructor de la clase SalaView
+    SalaView(ArrayList<Sala> listaSalas) {
+        this.listaSalas = listaSalas;
+        inicioPanel();
     }
+
+    // Método para inicializar el panel
+    public void inicioPanel() {
+        // Establecer el diseño del panel
+        setLayout(new GridLayout(4, 4));
+
+        // Crear paneles para cada sala
+        for (Sala sala : listaSalas) {
+            JPanel panelSalas = crearPanelSalas(sala.getNombre(), sala.getEstado());
+            add(panelSalas);
+        }
+
+        // Actualizar la interfaz
+        revalidate();
+        repaint();
+    }
+
+    // Método para crear el panel de cada sala
+    public JPanel crearPanelSalas(String nombre, String estado) {
+        JPanel panelSalas = new JPanel();
+        panelSalas.setLayout(new BorderLayout());
+
+        // Etiqueta para el nombre de la sala
+        JLabel nombresalasLabel = new JLabel(nombre, SwingConstants.CENTER);
+        panelSalas.add(nombresalasLabel, BorderLayout.CENTER);
+
+        // Imprimir el estado para depuración
+        System.out.println("Sala: " + nombre + ", Estado: " + estado);
+
+        // Ajustar el color de fondo según el estado
+        switch (estado) {
+            case "en uso":
+                panelSalas.setBackground(Color.BLUE);
+                break;
+            case "fuera de servicio":
+                panelSalas.setBackground(Color.CYAN);
+                break;
+            case "disponibles": // Asegúrate de que este texto coincida exactamente
+                panelSalas.setBackground(Color.GRAY);
+                break;
+            default:
+                panelSalas.setBackground(Color.LIGHT_GRAY); // Color por defecto
+                break;
+        }
+
+        // Establecer borde rojo
+        panelSalas.setBorder(BorderFactory.createLineBorder(Color.RED));
+        return panelSalas;
+    }
+}

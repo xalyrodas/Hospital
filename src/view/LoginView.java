@@ -1,55 +1,68 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame {
-
     private JTextField emailField;
-    private JLabel passwordLabel;
     private JPasswordField passwordField;
-    private JButton loginButton;
+    private JButton loginbutton;
 
-    public LoginView() {
-        setTitle("Formulario de Inicio de Sesión");
-        setSize(400, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centra la ventana en la pantalla
-        setLayout(null); // Deshabilita el layout manager predeterminado
+    public LoginView(){
+        setTitle("login");
+        setSize(400,300);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
-        // Crear y configurar los componentes
-        JLabel emailLabel = new JLabel("Nombre/Correo:");
-        emailLabel.setBounds(20, 300, 120, 30); // x, y, width, height
-        add(emailLabel);
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.white);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
 
-        this.emailField = new JTextField(20);
-        emailField.setBounds(150, 300, 200, 30); // x, y, width, height
-        add(emailField);
+        // Etiqueta de correo
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        JLabel emailLabel = new JLabel("Correo:");
+        formPanel.add(emailLabel, gbc);
 
-        this.passwordLabel = new JLabel("Contraseña:");
-        passwordLabel.setBounds(20, 350, 120, 30); // x, y, width, height
-        add(passwordLabel);
+        // Campo de texto de correo
+        gbc.gridx = 1;
+        emailField = new JTextField(20);
+        formPanel.add(emailField, gbc);
 
-        this.passwordField = new JPasswordField(20);
-        passwordField.setBounds(150, 350, 200, 30); // x, y, width, height
-        add(passwordField);
+        // Etiqueta de contraseña
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JLabel passwordLabel = new JLabel("Contraseña:");
+        formPanel.add(passwordLabel, gbc);
 
-        this.loginButton = new JButton("Iniciar Sesión");
-        loginButton.setBounds(150, 400, 150, 30); // x, y, width, height
-        add(loginButton);
+        // Campo de texto de contraseña
+        gbc.gridx = 1;
+        passwordField = new JPasswordField(20);
+        formPanel.add(passwordField, gbc);
 
-    setVisible(true);
+        // Panel separado para el botón
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.white);
+
+        loginbutton = new JButton("Iniciar Sesión");
+        buttonPanel.add(loginbutton);
+
+        // Añadir los paneles al JFrame
+        add(formPanel, BorderLayout.CENTER);   // Panel con los campos de texto
+        add(buttonPanel, BorderLayout.SOUTH);  // Panel con el botón
     }
-    public String getCorreo(){
-        return emailField.getText();
+
+    public JButton getLoginButton() {
+        return loginbutton;
     }
 
-    public String getPasswordLabel() {
-        return passwordLabel.getText();
+    public JTextField getEmailField() {
+        return emailField;
     }
 
-    public void addLoginListener(ActionListener Listener) {
-        loginButton.addActionListener(Listener);
+    public JPasswordField getPasswordField() {
+        return passwordField;
     }
 }
-

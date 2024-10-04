@@ -7,32 +7,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BackEnd {
-    private ArrayList<Doctor> doctors;
+    private bdDoctores bdDoctores;
 
-    public BackEnd(){
-        this.doctors = bdDoctores.listaDoctores();
+    public BackEnd() {
+        bdDoctores = new bdDoctores();
     }
 
     public HashMap<String, String> validarDatos(String correo, String contraseña) {
         HashMap<String, String> resultado = new HashMap<>();
 
-        for (Doctor doctor : doctors) {
-            if (doctor.getEmail().equalsIgnoreCase(correo)) {
-                if (doctor.getPasswordD().equalsIgnoreCase(contraseña)) {
-                    resultado.put("Nombre", doctor.getNombre());
-                    resultado.put("Especialidad", doctor.getEspecialidad());
-                    resultado.put("Edad", doctor.getUsuario());
-                    return resultado;
-                } else {
-                    resultado.put("Error", "Contraseña incorrecta");
-                    return resultado;
-                }
+        for (Doctor doctor : bdDoctores.getDoctores()) {
+            if (doctor.getEmail().equals(correo) && doctor.getPasswordD().equals(contraseña)) {
+                resultado.put("nombre", doctor.getNombre());
+                resultado.put("especialidad", doctor.getEspecialidad());
+                break;
             }
         }
 
-        resultado.put("Error", "Usuario Incorrecto");
         return resultado;
     }
-
 }
+
 

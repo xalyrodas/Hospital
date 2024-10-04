@@ -1,19 +1,20 @@
 package services;
+
 import model.Doctor;
 
+
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class bdDoctores {
-
-
-    public static ArrayList listaDoctores(){
-
-        ArrayList<Doctor> doctores = new ArrayList<>();
-        doctores.add("daniel.ortiz@hospital.com", new Doctor("Daniel", "Ortiz", "juan.perez@hospital.com", "12", "Cardiología"));
-
-
-        return doctores;
+    private List<Doctor> doctores;
+    public  bdDoctores(){
+        doctores=new ArrayList<>();
+        doctores.add(new Doctor("alyson","Rodas","cardiologa",2,"adgmail.com","1234","userj"));
     }
 
-
+    public List<Doctor> getDoctores() {
+        return doctores;
+    }
 }

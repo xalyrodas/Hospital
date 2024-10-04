@@ -17,13 +17,6 @@ public class Sala {
             return estado;
         }
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
-
-        public void setEstado(String estado) {
-            this.estado = estado;
-        }
 
     }
 
